@@ -1,26 +1,29 @@
-const allDrums = Array.from(document.getElementsByClassName('key'));
-
 document.addEventListener('keydown', (e) => {
-  const keyCode = e.keyCode.toString();
-  const drum = allDrums.filter((div) => div.attributes[0].value === keyCode);
-  if (drum.length > 0) {
-    manipulateClass(drum[0]);
+  const keyCode = e.keyCode;
+  // const drum = allDrums.filter((div) => div.attributes[0].value === keyCode);
+  const drum = document.querySelector(`div[data-key='${keyCode}']`);
+  if (drum) {
+    addClass(drum, keyCode);
   }
 });
 
-const manipulateClass = function(drum) {
+const addClass = function(drum, dataKey) {
   drum.classList.add('playing');
-  playSound(drum);
-  setTimeout(0, () => {
-    drum.classList.remove('playing');
-  });
+  playSound(dataKey);
 }
 
-const playSound = function(drum) {
-  const audioType = drum.querySelector('.sound').innerHTML;
-  const audio = new Audio(`./sounds/${audioType}.wav`);
+const playSound = function(dataKey) {
+  const audio =  document.querySelector(`audio[data-key='${dataKey}']`);
+  audio.currentTime = 0;
   audio.play();
 }
 
-// do not select a drum if not returned by filter
-// seperate out function into drum selection and sound playing
+const removeClass = function(drumTransEvent) {
+  if (drumTransEvent.propertyName === 'transform') {
+    console.log('here');
+    drumTransEvent.target.classList.remove('playing');
+  }
+}
+
+const allDrums = Array.from(document.getElementsByClassName('key'));
+allDrums.forEach(drum => drum.addEventListener('transitionend', removeClass));
