@@ -37,15 +37,16 @@ function setTimeSubsequent() {
   const minDegs = (min / 60) * 360 + 90;
   const hourDegs = (hour / 12) * 360 + 90;
 
-  if (second === 1) {
+  if (second === 1) { // re-add transition for second hand at 1 sec to prevent odd tick transition at 0 sec.
     SECOND_HAND.style.transition = 'all 0.05s cubic-bezier(0.1, 2.95, 0.58, 1)';
     MIN_HAND.style.transition = null;
     HOUR_HAND.style.transition = null;
-  } else if (second === 0) {
+  } else if (second === 0) { // update min and hour only if second hand at 0
     SECOND_HAND.style.transition = null;
     MIN_HAND.style.transition = 'all 0.05s cubic-bezier(0.1, 2.95, 0.58, 1)';
-    HOUR_HAND.style.transition = 'all 0.05s cubic-bezier(0.1, 2.95, 0.58, 1)';
     MIN_HAND.style.transform = `rotate(${minDegs}deg)`;
+    
+    HOUR_HAND.style.transition = 'all 0.05s cubic-bezier(0.1, 2.95, 0.58, 1)'; 
     HOUR_HAND.style.transform = `rotate(${hourDegs}deg)`;
   }
 
