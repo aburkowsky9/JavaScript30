@@ -1,5 +1,5 @@
 :root { 
-  --base-color: #ffc600;
+  --base: #ffc600;
   --spacing: 10px;
   --blur: 10px;
 }
@@ -8,6 +8,15 @@
   misc styles, nothing to do with CSS variables
   :root is equivalent to html selector but specificity is higher, better for declaring CSS variables
 */
+img {
+  padding: 30px;
+  background: var(--base);
+  filter: blur(var(--blur));
+}
+
+.hl {
+  color: var(--base);
+}
 
 body {
   text-align: center;
