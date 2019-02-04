@@ -2,12 +2,9 @@ const root = document.documentElement;
 const modifiers = document.querySelectorAll('.controls input');
 
 function changeCSSValue() {
-  const { name, value } = this;
-  if (name === 'base') {
-    root.style.setProperty(`--${name}`, value);
-  } else {
-    root.style.setProperty(`--${name}`, `${value}px`);
-  }
+  const { name, value, dataset } = this;
+  const suffix = dataset.sizing || '';
+  root.style.setProperty(`--${name}`, value + suffix);
 }
 
 modifiers.forEach((node) => {
