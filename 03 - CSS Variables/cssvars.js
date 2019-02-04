@@ -1,22 +1,20 @@
 const root = document.documentElement;
 const modifiers = document.querySelectorAll('.controls input');
 
-function changeCSSValue(varName, varValue) {
-  if (varName === 'base') {
-    root.style.setProperty(`--${varName}`, varValue);
+function changeCSSValue() {
+  const { name, value } = this;
+  if (name === 'base') {
+    root.style.setProperty(`--${name}`, value);
   } else {
-    root.style.setProperty(`--${varName}`, `${varValue}px`);
+    root.style.setProperty(`--${name}`, `${value}px`);
   }
 }
 
 modifiers.forEach((node) => {
-  node.addEventListener('change', () => {
-    changeCSSValue(node.id, node.value);
-  });
-  node.addEventListener('mousemove', () => {
-    changeCSSValue(node.id, node.value);
-  });
+  node.addEventListener('change', changeCSSValue);
+  node.addEventListener('mousemove', changeCSSValue);
 });
+
 // const spacingSlider = document.getElementById('spacing');
 // const blurSlider = document.getElementById('blur');
 // const colorSelector = document.getElementById('base');
