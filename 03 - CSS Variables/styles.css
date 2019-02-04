@@ -9,7 +9,7 @@
   :root is equivalent to html selector but specificity is higher, better for declaring CSS variables
 */
 img {
-  padding: 30px;
+  padding: var(--spacing) 10px 10px var(--spacing);
   background: var(--base);
   filter: blur(var(--blur));
 }

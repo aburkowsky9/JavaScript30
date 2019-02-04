@@ -1,11 +1,30 @@
-const blurSlider = document.getElementById('blur');
 const root = document.documentElement;
+const spacingSlider = document.getElementById('spacing');
+const blurSlider = document.getElementById('blur');
+const colorSelector = document.getElementById('base');
+
+spacingSlider.addEventListener('change', () => {
+  root.style.setProperty('--spacing', spacingSlider.value + 'px');
+});
+
+spacingSlider.addEventListener('mousemove', () => {
+  root.style.setProperty('--spacing', spacingSlider.value + 'px');
+});
+
 blurSlider.addEventListener('change', () => {
-  console.log(blurSlider.value);
   root.style.setProperty('--blur', blurSlider.value + 'px');
-})
+});
 
 blurSlider.addEventListener('mousemove', () => {
-  console.log(blurSlider.value);
   root.style.setProperty('--blur', blurSlider.value + 'px');
-})
+});
+
+colorSelector.addEventListener('change', () => {
+  root.style.setProperty('--base', colorSelector.value);
+});
+
+colorSelector.addEventListener('mousemove', () => {
+  root.style.setProperty('--base', colorSelector.value);
+});
+
+
