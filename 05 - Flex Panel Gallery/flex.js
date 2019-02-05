@@ -1,9 +1,9 @@
-function handlePanelSizing() {
+function togglePanelOpen() {
   handleClassList('open', this);
 }
 
-function handleTextTransition(event) {
-  if (event.propertyName === 'flex' || event.propertyName === 'flex-grow') {
+function toggleTextTransition({ propertyName }) {
+  if (propertyName === 'flex' || propertyName === 'flex-grow') {
     handleClassList('follow-open', this);
   }
 }
@@ -20,7 +20,7 @@ function handleClassList(className, node) {
   const panels = document.querySelectorAll('.panel');
   
   panels.forEach((panel) => {
-    panel.addEventListener('click', handlePanelSizing);
-    panel.addEventListener('transitionend', handleTextTransition);
+    panel.addEventListener('click', togglePanelOpen);
+    panel.addEventListener('transitionend', toggleTextTransition);
   }); 
 })();
