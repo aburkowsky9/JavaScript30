@@ -9,11 +9,7 @@ function toggleTextTransition({ propertyName }) {
 }
 
 function handleClassList(className, node) {
-  if (node.classList.contains(className)) {
-    node.classList.remove(className);
-  } else {
-    node.classList.add(className);
-  }
+  node.classList.toggle(className);
 }
 
 (function() {
