@@ -26,9 +26,50 @@
   </div>
 
 <script>
-  const addItems = document.querySelector('.add-items');
-  const itemsList = document.querySelector('.plates');
-  const items = [];
+const addItems = document.querySelector('.add-items');
+const itemsList = document.querySelector('.plates');
+let items = [];
+
+
+function mapItems(node) {
+  node.innerHTML = items.map((item, idx) => (
+    `<li>
+      <input type="checkbox" id="item${idx}" data-index=${idx} ${item.done ? 'checked' : ''}>
+      <label for="item${idx}">${item.text}</label>
+    </li>`
+  )).join('');
+}
+
+function submitHandler(e) {
+  e.preventDefault();
+  const text = this.item.value;
+  
+  items.push({
+    text,
+    done: false,
+  });
+  mapItems(itemsList);
+
+  localStorage.setItem('items', JSON.stringify(items));
+  this.reset();
+}
+
+function checkStorage() {
+  const storedOrders = JSON.parse(localStorage.getItem('items'));
+  items = storedOrders || [];
+  mapItems(itemsList);
+}
+
+function handleCheckbox(e) {
+  if (!e.target.matches('input[type="checkbox"]')) return;
+  const idx = e.target.dataset.index;
+  items[idx].done = !items[idx].done;
+  localStorage.setItem('items', JSON.stringify(items));
+}
+
+addItems.addEventListener('submit', submitHandler);
+window.addEventListener('load', checkStorage);
+itemsList.addEventListener('click', handleCheckbox);
 
 </script>
 
