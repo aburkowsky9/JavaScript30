@@ -182,6 +182,22 @@
     </li>
   </ul>
 <script>
+const videos = Array.from(document.querySelector('.videos').querySelectorAll('li'));
+let totalSeconds = videos.reduce((acc, video) => {
+  const splitTime = video.dataset.time.split(':');
+  splitTime.forEach((timebase, i, arr) => {
+    const timeInSeconds = parseInt(timebase) * (60 ** (arr.length - (i + 1)));
+    acc += timeInSeconds;
+  }); 
+  return acc;
+}, 0);
+
+const hours = Math.floor(totalSeconds / 3600);
+totalSeconds %= 3600;
+const minutes = Math.floor(totalSeconds / 60);
+const seconds = totalSeconds % 60;
+
+console.log(`${hours || '00'}:${minutes || '00'}:${seconds || '00'}`);
 </script>
 </body>
 </html>
