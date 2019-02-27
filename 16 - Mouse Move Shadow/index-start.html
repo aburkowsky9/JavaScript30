@@ -29,12 +29,39 @@
   }
 
   h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    text-shadow: 10px 10px rgba(255, 0, 255, 0.7),
+                -10px 10px rgba(0, 255, 255, 0.7),
+                10px -10px rgba(0, 255, 0, 0.7),
+                -10px -10px rgba(0, 0, 255, 0.7);
     font-size: 100px;
   }
   </style>
 
 <script>
+const hero = document.querySelector('.hero');
+const text = hero.querySelector('h1');
+const walk = 500; // 200 px walk from -100 to 100;
+
+function handleMouseMove(e) {
+  const {offsetWidth: width, offsetHeight: height } = hero;
+  let {offsetX: x, offsetY: y} = e;
+
+  if (e.target !== this) {
+    x += e.target.offsetLeft;
+    y += e.target.offsetTop;
+  }
+  
+  const walkX = Math.round((x/width * walk) - (walk/2));
+  const walkY = Math.round((y/height * walk) - (walk/2));
+  text.style.textShadow = `${walkX}px ${walkY}px rgba(255, 0, 255, 0.7),
+                           ${walkX * -1}px ${walkY}px rgba(0, 255, 255, 0.7),
+                           ${walkX}px ${walkY * -1}px rgba(0, 255, 0, 0.7),
+                           ${walkX * -1}px ${walkY * -1}px rgba(0, 0, 255, 0.7)`;
+}
+
+hero.addEventListener('mousemove', handleMouseMove);
 </script>
 </body>
 </html>
+
+rgba(255, 0, 255, 0.7)rgba(0, 255, 255, 0.7) , rgba(0, 255, 0, 0.7)  rgba(0, 0, 255, 0.7)
