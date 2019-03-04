@@ -177,7 +177,7 @@
     <li data-time="1:56">
       Video 57
     </li>
-    <li data-time="4:04">
+    <li data-time="4:06">
       Video 58
     </li>
   </ul>
@@ -197,7 +197,11 @@ totalSeconds %= 3600;
 const minutes = Math.floor(totalSeconds / 60);
 const seconds = totalSeconds % 60;
 
-console.log(`${hours || '00'}:${minutes || '00'}:${seconds || '00'}`);
+function formatTime(time) {
+  return time < 10 ? `0${time}` : time;
+}
+
+console.log(`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`);
 </script>
 </body>
 </html>
