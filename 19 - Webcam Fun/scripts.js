@@ -18,8 +18,7 @@ function paintToCanvas() {
   const { videoWidth, videoHeight } = this;
   canvas.width = videoWidth;
   canvas.height = videoHeight;
-  setInterval(() => ctx.drawImage(this, 0, 0, videoWidth, videoHeight), 16);
-  
+  return setInterval(() => ctx.drawImage(this, 0, 0, videoWidth, videoHeight), 16);
 }
 
 function takePhoto() {
