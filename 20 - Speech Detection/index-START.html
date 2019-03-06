@@ -10,9 +10,30 @@
   </div>
 
 <script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const speechList =  document.querySelector('.words');
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const speechRecognition = new SpeechRecognition();
+speechRecognition.lang = 'en-US';
+speechRecognition.interimResults = true;
 
+function listenToSpeech() {
+  speechRecognition.start();
+}
 
+function transcribeSpeech({ results }) {
+  const { isFinal } = results[0];
+  const { transcript } = results[0][0];
+
+  if (isFinal) {
+    const p = document.createElement('p');
+    p.textContent = transcript;
+    speechList.appendChild(p);
+  }
+}
+
+listenToSpeech();
+speechRecognition.addEventListener('end', listenToSpeech);
+speechRecognition.addEventListener('result', transcribeSpeech)
 </script>
 
 
