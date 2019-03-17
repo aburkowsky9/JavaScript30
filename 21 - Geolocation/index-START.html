@@ -59,6 +59,26 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+  const arrow = document.querySelector('.arrow');
+  const vel = document.querySelector('.speed-value');
+  
+  function orientCompass() {
+    navigator.geolocation.watchPosition(({ coords: { heading, speed }}) => {
+      console.log(heading)
+      vel.textContent = speed;
+      arrow.style.transform = `rotate(${heading}deg)`;
+    }, (err) => {
+      console.log(err);
+    });
+  }
+  
+  if ("geolocation" in navigator) {
+    orientCompass();
+  } else {
+    console.log ('Geolocation is not available!')
+  }
+
+
   </script>
 </body>
 </html>
