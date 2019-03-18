@@ -33,16 +33,26 @@
 
   const links = document.querySelectorAll('a');
   // get offsetx and y for tag 
-  function getTagCoordinates() {
-    const pos = this.getBoundingClientRect();
+  let currTag = null;
+
+  function positionTag(e, node = this) {
+    console.log(node);
+    const pos = node.getBoundingClientRect();
     const { top, left, width, height } = pos;
     highlight.style.transform = `translate(${left+window.scrollX}px, ${top+window.scrollY}px)`;
     highlight.style.width = `${width}px`;
     highlight.style.height = `${height}px`;
+    currTag = node;
+  }
+
+  function maintainTagPosition() {
+    if (!currTag) return;
+    positionTag(null, currTag);
   }
   // set top and left of highlight class
   // set hover listener for each a tag
-  links.forEach((a) => a.addEventListener('mouseover', getTagCoordinates));
+  links.forEach((a) => a.addEventListener('mouseover', positionTag));
+  window.addEventListener('resize', maintainTagPosition)
   </script>
 </body>
 </html>
