@@ -36,9 +36,9 @@ a {
   transition: all 0.2s;
   border-bottom: 2px solid white;
   position: absolute;
-  top: 0;
+  top: 0px;
   background: white;
-  left: 0;
+  left: 0px;
   z-index: -1;
   border-radius: 20px;
   display: block;
